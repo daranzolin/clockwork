@@ -6,10 +6,12 @@ Authors@R:
            family = "Ranzolin",
            role = c("aut", "cre"),
            email = "daranzolin@gmail.com")
-Description: What the package does (one paragraph).
+Description: Visualize cyclical data.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
 Imports: 
-    magrittr
+    magrittr,
+    rlang,
+    htmlwidgets

@@ -21,6 +21,8 @@ clockwork(data, x, y, cycle, x_ticks = 4, y_ticks = 3,
 
 \item{y_ticks}{number of ticks for y-axis}
 
+\item{show_cycle_stats}{whether to display the min, max, and mean for each cycle}
+
 \item{cycle_label}{cycle label}
 
 \item{width_height}{widget width and height}

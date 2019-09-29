@@ -6,6 +6,7 @@
 #' @param cycle a variable to cycle/overlay subsequent lines
 #' @param x_ticks number of ticks for x-axis
 #' @param y_ticks number of ticks for y-axis
+#' @param show_cycle_stats whether to display the min, max, and mean for each cycle
 #' @param cycle_label cycle label
 #' @param width_height widget width and height
 #' @param loop_interval cycle length in milliseconds
@@ -33,11 +34,11 @@ clockwork <- function(data,
 
   data_df <- as.data.frame(data)
   out_df <- data.frame(x = rep(NA, nrow(data_df)), stringsAsFactors = FALSE)
-  out_df$xValue <- data_df[,quo_name(x)]
+  out_df$xValue <- data_df[,rlang::quo_name(x)]
   if (!is.numeric(out_df$xValue)) stop("x must be numeric", call. = FALSE)
-  out_df$yValue <- data_df[,quo_name(y)]
+  out_df$yValue <- data_df[,rlang::quo_name(y)]
   if (!is.numeric(out_df$yValue)) stop("y must be numeric", call. = FALSE)
-  out_df$cycle <- data_df[,quo_name(cycle)]
+  out_df$cycle <- data_df[,rlang::quo_name(cycle)]
   cycles <- unique(out_df$cycle)
 
   x = list(

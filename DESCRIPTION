@@ -1,0 +1,15 @@
+Package: clockwork
+Title: Create clock-like htmlwidgets
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "David",
+           family = "Ranzolin",
+           role = c("aut", "cre"),
+           email = "daranzolin@gmail.com")
+Description: What the package does (one paragraph).
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.1.1
+Imports: 
+    magrittr

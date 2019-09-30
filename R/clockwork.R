@@ -8,7 +8,7 @@
 #' @param y_ticks number of ticks for y-axis
 #' @param show_cycle_stats whether to display the min, max, and mean for each cycle
 #' @param cycle_label cycle label
-#' @param width_height widget width and height
+#' @param size widget width and height
 #' @param loop_interval cycle length in milliseconds
 #' @param repeat_cycles whether to repeat visualization after all cycles
 #'
@@ -23,7 +23,7 @@ clockwork <- function(data,
                       y_ticks = 3,
                       show_cycle_stats = FALSE,
                       cycle_label = "Cycle: ",
-                      width_height = 400,
+                      size = 400,
                       loop_interval = 4000,
                       repeat_cycles = TRUE
                       ) {

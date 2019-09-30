@@ -19,8 +19,8 @@ HTMLWidgets.widget({
         let currentMean;
         let minMaxData;
         let radialMinMaxData;
-        let width = opts.width_height;
-        let height = opts.width_height;
+        let width = opts.size;
+        let height = opts.size;
         let cycle_label = opts.cycle_label;
         let textData = opts.show_cycle_stats ?  [cycle_label, "min: ", "max: ", "mean: "] : [cycle_label];
         let ticks = opts.x_ticks;
@@ -37,7 +37,7 @@ HTMLWidgets.widget({
         let i = 0;
         let active_line_color = opts.hasOwnProperty("active_line_color") ? opts.active_line_color : "#da4f81";
         let past_line_color = opts.hasOwnProperty("past_line_color") ? opts.past_line_color : "#ccc";
-        let past_line_opacity = opts.hasOwnProperty("past_line_opacity") ? opts.past_line_opacity : 0.35;
+        let past_line_opacity = opts.hasOwnProperty("past_line_opacity") ? opts.past_line_opacity : 0.4;
         let grid_line_color = opts.hasOwnProperty("grid_line_color") ? opts.grid_line_color : "#000";
         // let background_fill = opts.hasOwnProperty("background_fill") ? opts.background_fill : "white";
         let x_axis_font_size = opts.hasOwnProperty("x_axis_font_size") ? opts.x_axis_font_size : 10;

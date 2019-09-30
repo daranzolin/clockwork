@@ -5,8 +5,8 @@
 \title{Create a clockwork widget}
 \usage{
 clockwork(data, x, y, cycle, x_ticks = 4, y_ticks = 3,
-  show_cycle_stats = FALSE, cycle_label = "Cycle: ",
-  width_height = 400, loop_interval = 4000, repeat_cycles = TRUE)
+  show_cycle_stats = FALSE, cycle_label = "Cycle: ", size = 400,
+  loop_interval = 4000, repeat_cycles = TRUE)
 }
 \arguments{
 \item{data}{a tabular object}
@@ -25,7 +25,7 @@ clockwork(data, x, y, cycle, x_ticks = 4, y_ticks = 3,
 
 \item{cycle_label}{cycle label}
 
-\item{width_height}{widget width and height}
+\item{size}{widget width and height}
 
 \item{loop_interval}{cycle length in milliseconds}
 

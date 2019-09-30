@@ -48,7 +48,7 @@ clockwork <- function(data,
     x_ticks = x_ticks,
     y_ticks = y_ticks,
     cycle_label = cycle_label,
-    width_height = width_height,
+    size = size,
     repeat_cycles = repeat_cycles,
     loop_interval = loop_interval
   )

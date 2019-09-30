@@ -7,7 +7,7 @@
 
 clockwork creates a cyclical, radial line charts. Cycle through years, months, days, hours, minutes, or campaigns.
 
-## Installation
+### Installation
 
 You can install the released version of clockwork from GitHub with:
 
@@ -15,12 +15,30 @@ You can install the released version of clockwork from GitHub with:
 remotes::install_github("daranzolin/clockwork")
 ```
 
-## 
+### Example 1: Daily Births by Year
 
-This is a basic example which shows you how to solve a common problem:
+```r
+library(tidyverse)
+library(lubridate)
+births <- read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2018/2018-10-02/us_births_2000-2014.csv")
+births <- births %>% 
+  unite("date", date_of_month, month, year, sep = "-") %>% 
+  mutate(date = lubridate::dmy(date),
+         day_of_year = yday(date),
+         year = year(date)) 
 
-``` r
-library(clockwork)
-## basic example code
+births %>% 
+  filter(year %in% 2008:2014) %>% 
+  clockwork(x = day_of_year,
+            y = births,
+            cycle = year,
+            cycle_label = "Year: ",
+            show_cycle_stats = TRUE,
+            x_ticks = 12) 
 ```
+
+![](inst/clockwork1.gif)
+
+Control loop duration, stroke line colors/opacity, and font size/family with the `cw_style` function.
+
 

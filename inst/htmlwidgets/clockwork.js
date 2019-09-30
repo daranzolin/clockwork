@@ -13,7 +13,7 @@ HTMLWidgets.widget({
       renderValue: function(opts) {
 
         let data = HTMLWidgets.dataframeToD3(opts.data);
-        //console.log(data);
+        console.log(data);
         let currentMin;
         let currentMax;
         let currentMean;
@@ -37,7 +37,7 @@ HTMLWidgets.widget({
         let i = 0;
         let active_line_color = opts.hasOwnProperty("active_line_color") ? opts.active_line_color : "#da4f81";
         let past_line_color = opts.hasOwnProperty("past_line_color") ? opts.past_line_color : "#ccc";
-        let past_line_opacity = opts.hasOwnProperty("past_line_opacity") ? opts.past_line_opacity : 0.3;
+        let past_line_opacity = opts.hasOwnProperty("past_line_opacity") ? opts.past_line_opacity : 0.35;
         let grid_line_color = opts.hasOwnProperty("grid_line_color") ? opts.grid_line_color : "#000";
         // let background_fill = opts.hasOwnProperty("background_fill") ? opts.background_fill : "white";
         let x_axis_font_size = opts.hasOwnProperty("x_axis_font_size") ? opts.x_axis_font_size : 10;
@@ -53,13 +53,6 @@ HTMLWidgets.widget({
           .attr("viewBox", [-width / 2, -height / 2, width, height]);
           // .attr("viewport-fill", backgr);
           //.attr("preserveAspectRatio", "xMaxYMax meet");
-
-      /*svg.append("rect")
-        .attr("x", 0)
-        .attr("y", 0)
-        .attr("width", "100%")
-        .attr("height", "100%")
-        .attr("fill", background_fill); */
 
       let xScale = d3.scaleLinear()
           .domain(d3.extent(data, d => d.xValue))
@@ -125,7 +118,7 @@ HTMLWidgets.widget({
                 .style("font-size", `${inner_stats_font_size}px`)
                 .attr("font-family", font_family)
                 .attr("class", (d, i) => textClasses[i])
-                .attr("x", 50)
+                .attr("x", 25)
                 .attr("y", 0)
                 .attr("dy", "0.35em")
                 .text(d => d));
@@ -153,8 +146,6 @@ HTMLWidgets.widget({
           .attr("font-size", `${x_axis_font_size}px`)
           .attr("font-family", font_family)
           .text(d => d.label);
-
-          console.log(opts.repeat_cycles);
 
         let ticker = d3.interval(e => {
 

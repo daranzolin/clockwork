@@ -13,7 +13,7 @@ HTMLWidgets.widget({
       renderValue: function(opts) {
 
         let data = HTMLWidgets.dataframeToD3(opts.data);
-        console.log(data);
+        //console.log(data);
         let currentMin;
         let currentMax;
         let currentMean;
@@ -29,8 +29,9 @@ HTMLWidgets.widget({
         let outerRadius = (width / 2) - margin;
         let loopInterval = opts.loop_interval;
         let data_x_extent = d3.extent(data, d => d.xValue);
-        let x_steps = Math.round(data_x_extent[1]/ticks);
-        let tick_marks = d3.range(data_x_extent[0], data_x_extent[1], x_steps);
+        let x_steps = Math.ceil(data_x_extent[1]/ticks);
+        let tick_marks = d3.range(data_x_extent[0], data_x_extent[1] + 1, x_steps);
+        console.log(tick_marks)
         let textClasses = ["currentCycle", "currentMin", "currentMax", "currentMean"];
         let currentCycle = opts.cycles[0];
         let n_cycles = opts.cycles.length;
@@ -55,7 +56,7 @@ HTMLWidgets.widget({
           //.attr("preserveAspectRatio", "xMaxYMax meet");
 
       let xScale = d3.scaleLinear()
-          .domain(d3.extent(data, d => d.xValue))
+          .domain(d3.extent(data, (d, i) => i === 0 ? 1 : d.xValue + 1))
           .range([0, 2 * Math.PI]);
 
       let xAxis = g => g

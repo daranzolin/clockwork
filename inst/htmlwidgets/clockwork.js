@@ -8,6 +8,10 @@ HTMLWidgets.widget({
 
     // TODO: define shared variables for this instance
 
+    function onlyUnique(value, index, self) {
+      return self.indexOf(value) === index;
+    }
+
     return {
 
       renderValue: function(opts) {
@@ -28,10 +32,6 @@ HTMLWidgets.widget({
         let innerRadius = width / 5;
         let outerRadius = (width / 2) - margin;
         let loopInterval = opts.loop_interval;
-        let data_x_extent = d3.extent(data, d => d.xValue);
-        let x_steps = Math.ceil(data_x_extent[1]/ticks);
-        let tick_marks = d3.range(data_x_extent[0], data_x_extent[1] + 1, x_steps);
-        console.log(tick_marks)
         let textClasses = ["currentCycle", "currentMin", "currentMax", "currentMean"];
         let currentCycle = opts.cycles[0];
         let n_cycles = opts.cycles.length;
@@ -46,18 +46,35 @@ HTMLWidgets.widget({
         let inner_stats_font_size = opts.hasOwnProperty("inner_stats_font_size") ? opts.inner_stats_font_size : 12;
         let font_family = opts.hasOwnProperty("font_family") ? opts.font_family : "Arial";
         let stop_cycles;
-
+        let data_x_extent;
+        let xScale;
+        let x_steps;
+        let tick_marks;
+        let palette = opts.palette;
+        //let color = d3.scaleSequential(d3[palette]);
+        let color = d3.scaleSequential(d3[palette]).domain(opts.domain)
         const svg = d3.select(el)
           .append("svg")
           .attr("width", width)
           .attr("height", height)
+          //.attr("background-color", "black")
           .attr("viewBox", [-width / 2, -height / 2, width, height]);
-          // .attr("viewport-fill", backgr);
           //.attr("preserveAspectRatio", "xMaxYMax meet");
 
-      let xScale = d3.scaleLinear()
-          .domain(d3.extent(data, (d, i) => i === 0 ? 1 : d.xValue + 1))
+        if (opts.xIsNumeric) {
+          data_x_extent = d3.extent(data, d => d.xValue);
+          x_steps = Math.ceil(data_x_extent[1]/ticks);
+          tick_marks = d3.range(data_x_extent[0], data_x_extent[1] + 1, x_steps);
+          xScale = d3.scaleLinear()
+            .domain(d3.extent(data, (d, i) => i === 0 ? 1 : d.xValue + 1))
+            .range([0, 2 * Math.PI]);
+
+        } else {
+          tick_marks = data.map(d => d.xValue).filter(onlyUnique)
+          xScale = d3.scaleBand()
+          .domain(data.map(d => d.xValue).filter(onlyUnique))
           .range([0, 2 * Math.PI]);
+        }
 
       let xAxis = g => g
           .call(g => g.selectAll("g")
@@ -171,7 +188,7 @@ HTMLWidgets.widget({
             let path = svg.append("path")
               .attr("class", "lineclass")
               .attr("fill", "none")
-              .attr("stroke", active_line_color)
+              .attr("stroke", color(d3.mean(filtered_data, d => d.yValue)))
               .attr("stroke-width", 1.5)
               .attr("d", line.radius(d => yScale(d.yValue))(filtered_data));
 

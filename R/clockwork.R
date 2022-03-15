@@ -11,6 +11,7 @@
 #' @param size widget width and height
 #' @param loop_interval cycle length in milliseconds
 #' @param repeat_cycles whether to repeat visualization after all cycles
+#' @param palette A D3 color palette
 #'
 #' @import htmlwidgets
 #'
@@ -25,7 +26,8 @@ clockwork <- function(data,
                       cycle_label = "Cycle: ",
                       size = 400,
                       loop_interval = 4000,
-                      repeat_cycles = TRUE
+                      repeat_cycles = TRUE,
+                      palette = "interpolateViridis"
                       ) {
 
   x <- rlang::enquo(x)
@@ -35,11 +37,17 @@ clockwork <- function(data,
   data_df <- as.data.frame(data)
   out_df <- data.frame(x = rep(NA, nrow(data_df)), stringsAsFactors = FALSE)
   out_df$xValue <- data_df[,rlang::quo_name(x)]
-  if (!is.numeric(out_df$xValue)) stop("x must be numeric", call. = FALSE)
+  if (is.numeric(out_df$xValue)) {
+    xIsNumeric <- TRUE
+  } else {
+    xIsNumeric <- FALSE
+  }
+  # if (!is.numeric(out_df$xValue)) stop("x must be numeric", call. = FALSE)
   out_df$yValue <- data_df[,rlang::quo_name(y)]
   if (!is.numeric(out_df$yValue)) stop("y must be numeric", call. = FALSE)
   out_df$cycle <- data_df[,rlang::quo_name(cycle)]
   cycles <- unique(out_df$cycle)
+  domain <- range(out_df$yValue)
 
   x = list(
     data = out_df,
@@ -50,7 +58,9 @@ clockwork <- function(data,
     cycle_label = cycle_label,
     size = size,
     repeat_cycles = repeat_cycles,
-    loop_interval = loop_interval
+    loop_interval = loop_interval,
+    palette = palette,
+    domain = domain
   )
 
   htmlwidgets::createWidget(

@@ -4,9 +4,20 @@
 \alias{clockwork}
 \title{Create a clockwork widget}
 \usage{
-clockwork(data, x, y, cycle, x_ticks = 4, y_ticks = 3,
-  show_cycle_stats = FALSE, cycle_label = "Cycle: ", size = 400,
-  loop_interval = 4000, repeat_cycles = TRUE)
+clockwork(
+  data,
+  x,
+  y,
+  cycle,
+  x_ticks = 4,
+  y_ticks = 3,
+  show_cycle_stats = FALSE,
+  cycle_label = "Cycle: ",
+  size = 400,
+  loop_interval = 4000,
+  repeat_cycles = TRUE,
+  palette = "interpolateViridis"
+)
 }
 \arguments{
 \item{data}{a tabular object}
@@ -30,6 +41,8 @@ clockwork(data, x, y, cycle, x_ticks = 4, y_ticks = 3,
 \item{loop_interval}{cycle length in milliseconds}
 
 \item{repeat_cycles}{whether to repeat visualization after all cycles}
+
+\item{palette}{A D3 color palette}
 }
 \description{
 Create a clockwork widget

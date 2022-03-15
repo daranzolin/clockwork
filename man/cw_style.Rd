@@ -4,11 +4,17 @@
 \alias{cw_style}
 \title{Style a clockwork widget}
 \usage{
-cw_style(clockwork, active_line_color = "#da4f81",
-  past_line_color = "#ccc", past_line_opacity = 0.4,
-  grid_line_color = "#000", x_axis_font_size = 10,
-  y_axis_font_size = 10, inner_stats_font_size = 12,
-  font_family = "Arial")
+cw_style(
+  clockwork,
+  active_line_color = "#da4f81",
+  past_line_color = "#ccc",
+  past_line_opacity = 0.4,
+  grid_line_color = "#000",
+  x_axis_font_size = 10,
+  y_axis_font_size = 10,
+  inner_stats_font_size = 12,
+  font_family = "Arial"
+)
 }
 \arguments{
 \item{clockwork}{a clockwork object}
